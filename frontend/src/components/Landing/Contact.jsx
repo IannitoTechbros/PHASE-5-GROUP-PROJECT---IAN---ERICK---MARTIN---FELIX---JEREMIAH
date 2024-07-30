@@ -6,7 +6,7 @@ const Contact = () => {
     <div className="bg-blue-500 min-h-screen flex flex-col items-center justify-between">
       <div className="flex-grow flex items-center justify-center p-4 w-full">
         <div className="bg-blue-200 p-8 rounded-lg shadow-lg w-full max-w-lg">
-          <h2 className="text-2xl font-bold mb-4 text-center">Contact Us</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center ">Contact Us</h2>
           <form className="space-y-4">
             <div>
               <label className="block font-bold text-black">Name:</label>
