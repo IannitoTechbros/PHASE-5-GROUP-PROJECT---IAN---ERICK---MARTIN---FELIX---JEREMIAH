@@ -45,7 +45,7 @@ const Contact = () => {
           <li>Email: contact@spacehub.com</li>
           <li>Phone: +123 456 7890</li>
         </ul>
-        <p className="mt-4 font-bold">© 2024 Your Company. All rights reserved.</p>
+        <p className="mt-4 font-bold">© 2024 SpaceHub. All rights reserved.</p>
       </footer>
     </div>
   );
