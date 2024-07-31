@@ -43,12 +43,12 @@ const ContactUs = () => {
           <Link to="/" className='text-lg text-white hover:text-yellow-400'>Home</Link>
         </nav>
       </header>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 py-8">
-        <h2 className="text-3xl font-bold mb-6">Contact Us</h2> {/* Increased font size */}
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
         {!submitted ? (
-          <form onSubmit={handleSubmit} className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg" style={{ transform: 'scale(1.3)' }}> {/* Increased size */}
-            <div className="mb-6">
-              <label htmlFor="name" className="block text-gray-700 text-lg font-bold mb-4"> {/* Increased font size */}
+          <form onSubmit={handleSubmit} className="max-w-md w-full bg-white p-6 rounded shadow">
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
                 Your Name
               </label>
               <input
@@ -57,12 +57,12 @@ const ContactUs = () => {
                 value={userName}
                 onChange={handleNameChange}
                 placeholder="Enter your name"
-                className="px-4 py-3 placeholder-gray-400 text-gray-700 bg-white rounded-lg text-lg shadow outline-none focus:outline-none focus:ring w-full hover:animate-bounce" /* Increased size */
+                className="px-3 py-2 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full hover:animate-bounce"
               />
-              {nameError && <p className="text-red-500 text-sm italic">{nameError}</p>} {/* Increased font size */}
+              {nameError && <p className="text-red-500 text-xs italic">{nameError}</p>}
             </div>
-            <div className="mb-6">
-              <label htmlFor="message" className="block text-gray-700 text-lg font-bold mb-4"> {/* Increased font size */}
+            <div className="mb-4">
+              <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
                 Your Message
               </label>
               <textarea
@@ -70,21 +70,21 @@ const ContactUs = () => {
                 value={message}
                 onChange={handleMessageChange}
                 placeholder="Enter your message"
-                className="px-4 py-3 placeholder-gray-400 text-gray-700 bg-white rounded-lg text-lg shadow outline-none focus:outline-none focus:ring w-full hover:animate-bounce" /* Increased size */
+                className="px-3 py-2 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full hover:animate-bounce"
               ></textarea>
-              {messageError && <p className="text-red-500 text-sm italic">{messageError}</p>} {/* Increased font size */}
-              <div className="text-right text-gray-500 text-sm mt-1">{message.length}/500</div> {/* Increased font size */}
+              {messageError && <p className="text-red-500 text-xs italic">{messageError}</p>}
+              <div className="text-right text-gray-500 text-xs mt-1">{message.length}/500</div>
             </div>
             <button
               type="submit"
-              className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transform transition duration-300 hover:scale-105"
+              className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transform transition duration-300 hover:scale-105"
             >
               Submit
             </button>
           </form>
         ) : (
           <div className="text-center">
-            <p className="text-xl font-bold">Thanks {userName} for contacting us!</p> {/* Increased font size */}
+            <p className="text-lg font-bold">Thanks {userName} for contacting us!</p>
           </div>
         )}
       </div>
