@@ -10,6 +10,7 @@ const ContactUs = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isAccordionOpen, setAccordionOpen] = useState(true);
   const [error, setError] = useState('');
+  const [rating, setRating] = useState(0); // Added state for rating
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +31,10 @@ const ContactUs = () => {
       return () => clearTimeout(timer);
     }
   }, [isAccordionOpen]);
+
+  const handleStarClick = (index) => {
+    setRating(index + 1); // Update rating based on clicked star index
+  };
 
   return (
     <>
@@ -88,6 +93,28 @@ const ContactUs = () => {
                   className="px-3 py-2 placeholder-gray-500 text-gray-300 bg-gray-700 rounded text-sm shadow-sm outline-none focus:ring-2 focus:ring-blue-500 w-full hover:bg-gray-600 transition-colors"
                 ></textarea>
               </div>
+              
+              {/* Star Rating */}
+              <div className="mb-4 flex items-center">
+                <label htmlFor="rating" className="block text-gray-300 text-sm font-bold mb-2 mr-2">
+                  Rate Us:
+                </label>
+                <div id="rating" className="flex">
+                  {[...Array(5)].map((_, index) => (
+                    <svg
+                      key={index}
+                      onClick={() => handleStarClick(index)}
+                      className={`w-6 h-6 cursor-pointer ${rating > index ? 'text-yellow-500' : 'text-gray-400'}`}
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z" />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+              
               {error && <p className="text-red-500 mb-4">{error}</p>}
               <button
                 type="submit"
