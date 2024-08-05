@@ -5,6 +5,7 @@ import logo from '../../assets/images/logo.png';
 
 const ContactUs = () => {
   const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState(''); // Added state for email
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [isAccordionOpen, setAccordionOpen] = useState(true);
@@ -12,8 +13,8 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userName.trim() === '' || message.trim() === '') {
-      setError('Please fill out both fields.');
+    if (userName.trim() === '' || email.trim() === '' || message.trim() === '') {
+      setError('Please fill out all fields.');
     } else {
       setError('');
       setSubmitted(true);
@@ -59,6 +60,19 @@ const ContactUs = () => {
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
                   placeholder="Enter your name"
+                  className="px-3 py-2 placeholder-gray-500 text-gray-300 bg-gray-700 rounded text-sm shadow-sm outline-none focus:ring-2 focus:ring-blue-500 w-full hover:bg-gray-600 transition-colors"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
+                  Your Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
                   className="px-3 py-2 placeholder-gray-500 text-gray-300 bg-gray-700 rounded text-sm shadow-sm outline-none focus:ring-2 focus:ring-blue-500 w-full hover:bg-gray-600 transition-colors"
                 />
               </div>
@@ -125,18 +139,6 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-
-      <footer className="w-full bg-gray-800 py-4 mt-auto text-center text-white">
-        <div className="text-lg font-bold">
-          <p>SpaceHub ... all rights reserved 2024</p>
-          <p>
-            For more info visit us at{' '}
-            <a href="http://www.spacehub.com" className="text-blue-400 hover:underline" target="_blank" rel="noopener noreferrer">
-              www.spacehub.com
-            </a>
-          </p>
-        </div>
-      </footer>
     </>
   );
 };
