@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  background-color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  margin: 50px auto;
+  width: 90%;
+}
+
+header h1 {
+  color: #fff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.accordion {
+  background: #333;
+  width: 100%;
+  min-width: 800px;
+  display: block;
+  list-style-type: none;
+  overflow: hidden;
+  height: 200px;
+  font-size: 0;
+}
+
+.tab {
+  display: inline-block;
+  background-color: #444;
+  border-right: #333 1px solid;
+  width: 80px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+  transition: all 0.5s ease-in-out 0.1s;
+}
+
+.tab:hover {
+  width: 450px;
+}
+
+.tab:hover .social a {
+  margin-left: -5px;
+}
+
+.tab .content {
+  background: #fff;
+  width: 360px;
+  height: 200px;
+  margin-left: 80px;
+  padding: 50px 0 0 15px;
+  position: relative;
+}
+
+.tab .content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.tab .content p {
+  font-size: 0.85rem;
+  line-height: 1.4rem;
+  padding-right: 30px;
+}
+
+.social {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 80px;
+  background-color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+}
+
+.social a {
+  font-size: 48px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.4s ease-in-out;
+}
+
+.social.youtube:hover {
+  background-color: #ff0000; /* YouTube red */
+}
+
+.social.twitter:hover {
+  background-color: #1da1f2; /* Twitter blue */
+}
+
+.social.facebook:hover {
+  background-color: #1877f2; /* Facebook blue */
+}
+
+.social.instagram:hover {
+  background-color: #d51c1c; /* Instagram pink */
+}
+
+.social.linkedin:hover {
+  background-color: #0077b5; /* LinkedIn blue */
+}
+
+.social:hover a {
+  color: #fff; /* Ensure icon is visible against background color */
+}
+
+@media (max-width: 950px) {
+  .container {
+    width: 70%;
+  }
+
+  .tab {
+    display: block;
+    width: 100%;
+    border-bottom: 3px #333 solid;
+  }
+
+  .accordion {
+    display: block;
+    min-width: 450px;
+    height: auto;
+  }
+
+  .tab .content {
+    width: 85%;
+  }
+
+  .tab:hover {
+    width: 100%;
+  }
+}
+
+@media (max-width: 680px) {
+  .container {
+    width: 95%;
+  }
+
+  .accordion {
+    width: 100%;
+    min-width: 350px;
+  }
+
+  /* Star Rating */
+  #rating svg {
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  #rating svg:hover {
+    color: #f5b301; /* Yellow color on hover */
+  }
+
+  .text-yellow-500 {
+    color: #f5b301; /* Yellow color for filled stars */
+  }
+
+  .text-gray-400 {
+    color: #d1d5db; /* Gray color for empty stars */
+  }
+}

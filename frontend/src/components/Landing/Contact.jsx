@@ -1,169 +1,200 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaYoutube, FaTwitter, FaFacebookF, FaInstagram } from 'react-icons/fa';
-import logo from '../../assets/images/logo.png';
+import logo from '../../assets/images/logo.png'; 
+import './ContactUs.css';
 
 const ContactUs = () => {
   const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState(''); // Added state for email
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState(''); // State for email
+  const [message, setMessage] = useState(''); // State for message
+  const [rating, setRating] = useState(0);
   const [submitted, setSubmitted] = useState(false);
-  const [isAccordionOpen, setAccordionOpen] = useState(true);
-  const [error, setError] = useState('');
-  const [rating, setRating] = useState(0); // Added state for rating
+  const [errors, setErrors] = useState({}); // State for validation errors
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (userName.trim() === '' || email.trim() === '' || message.trim() === '') {
-      setError('Please fill out all fields.');
-    } else {
-      setError('');
+    // Simple validation
+    let formErrors = {};
+    if (!userName) formErrors.userName = 'Name is required';
+    if (!email) formErrors.email = 'Email is required';
+    if (!/\S+@\S+\.\S+/.test(email)) formErrors.email = 'Email is invalid';
+    if (!message) formErrors.message = 'Message is required';
+
+    if (Object.keys(formErrors).length === 0) {
+      // No errors
       setSubmitted(true);
+      setErrors({});
+    } else {
+      // Set errors
+      setErrors(formErrors);
     }
   };
 
-  useEffect(() => {
-    if (isAccordionOpen) {
-      const timer = setTimeout(() => {
-        setAccordionOpen(false);
-      }, 60000); // Auto-collapse after 1 minute
+  const handleNameChange = (e) => {
+    setUserName(e.target.value);
+  };
 
-      return () => clearTimeout(timer);
-    }
-  }, [isAccordionOpen]);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
 
   const handleStarClick = (index) => {
-    setRating(index + 1); // Update rating based on clicked star index
+    setRating(index + 1);
   };
 
   return (
     <>
-      <header className="w-full flex justify-between items-center py-4 px-6 bg-gray-800">
-        <Link to="/" className="flex items-center space-x-2">
+      <header className='w-full flex justify-between items-center py-4 px-6'>
+        <Link to="/" className='flex items-center space-x-2'>
           <img src={logo} alt="Space Hub Logo" className="w-20 h-18" />
         </Link>
-        <nav className="flex space-x-4">
-          <Link to="/" className="text-lg text-white hover:text-yellow-400 transition-colors">
-            Home
-          </Link>
+        <nav className='flex space-x-4'>
+          <Link to="/" className='text-lg hover:text-yellow-400'>Home</Link>
         </nav>
       </header>
-
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white py-8 space-y-8">
-        {/* Contact Us Form */}
-        <div className="w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-6 text-center">Contact Us</h2>
-          {!submitted ? (
-            <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg transition-transform hover:scale-105 hover:bg-light-blue-600">
-              <div className="mb-4">
-                <label htmlFor="name" className="block text-gray-300 text-sm font-bold mb-2">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  placeholder="Enter your name"
-                  className="px-3 py-2 placeholder-gray-500 text-gray-300 bg-gray-700 rounded text-sm shadow-sm outline-none focus:ring-2 focus:ring-blue-500 w-full hover:bg-gray-600 transition-colors"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
-                  Your Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="px-3 py-2 placeholder-gray-500 text-gray-300 bg-gray-700 rounded text-sm shadow-sm outline-none focus:ring-2 focus:ring-blue-500 w-full hover:bg-gray-600 transition-colors"
-                />
-              </div>
-              <div className="mb-4">
-                <label htmlFor="message" className="block text-gray-300 text-sm font-bold mb-2">
-                  Your Message
-                </label>
-                <textarea
-                  id="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Enter your message"
-                  className="px-3 py-2 placeholder-gray-500 text-gray-300 bg-gray-700 rounded text-sm shadow-sm outline-none focus:ring-2 focus:ring-blue-500 w-full hover:bg-gray-600 transition-colors"
-                ></textarea>
-              </div>
-              
-              {/* Star Rating */}
-              <div className="mb-4 flex items-center">
-                <label htmlFor="rating" className="block text-gray-300 text-sm font-bold mb-2 mr-2">
-                  Rate Us:
-                </label>
-                <div id="rating" className="flex">
-                  {[...Array(5)].map((_, index) => (
-                    <svg
-                      key={index}
-                      onClick={() => handleStarClick(index)}
-                      className={`w-6 h-6 cursor-pointer ${rating > index ? 'text-yellow-500' : 'text-gray-400'}`}
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              
-              {error && <p className="text-red-500 mb-4">{error}</p>}
-              <button
-                type="submit"
-                className="bg-indigo-600 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
-              >
-                Submit
-              </button>
-            </form>
-          ) : (
-            <div className="text-center">
-              <p className="text-lg font-bold">Thanks {userName} for contacting us!</p>
-              <p>Feel free to follow our social media pages below!</p>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+        {!submitted ? (
+          <form onSubmit={handleSubmit} className="max-w-md w-full">
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                Your Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={userName}
+                onChange={handleNameChange}
+                placeholder="Enter your name"
+                className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full"
+              />
+              {errors.userName && <p className="text-red-500 text-xs">{errors.userName}</p>}
             </div>
-          )}
-        </div>
-
-        {/* Social Media Accordion */}
-        <div className="w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-6 text-center">Follow Us On Social Media</h2>
-          <div className="bg-gray-800 p-4 rounded-lg shadow-lg transition-transform hover:bg-gray-700">
-            <button
-              onClick={() => setAccordionOpen(!isAccordionOpen)}
-              className="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-500 transition-colors mb-4"
-            >
-              {isAccordionOpen ? 'Collapse' : 'Expand'}
-            </button>
-            {isAccordionOpen && (
-              <ul className="space-y-2">
-                {[
-                  { platform: 'YouTube', url: 'https://youtube.com/traversymedia', icon: <FaYoutube className="text-red-600" />, description: 'Follow us on YouTube for the latest Space rentals' },
-                  { platform: 'Twitter', url: 'https://twitter.com/traversymedia', icon: <FaTwitter className="text-blue-400" />, description: 'Follow us on Twitter for updates, article & blog shares, and more' },
-                  { platform: 'Facebook', url: 'https://facebook.com/traversymedia', icon: <FaFacebookF className="text-blue-700" />, description: 'Follow us on Facebook to stay up to date with our work' },
-                  { platform: 'Instagram', url: 'http://instagram.com/traversymedia', icon: <FaInstagram className="text-pink-500" />, description: 'Follow us on Instagram for a more personal look into our work' }
-                ].map(({ platform, url, icon, description }) => (
-                  <li key={platform} className="transition-transform transform hover:scale-105">
-                    <div className="flex items-center p-4 bg-gray-700 rounded-lg shadow-lg hover:bg-gray-600 transition-all">
-                      <a href={url} target="_blank" rel="noopener noreferrer" className="text-2xl mr-4">
-                        {icon}
-                      </a>
-                      <div>
-                        <h3 className="text-xl font-semibold">{platform}</h3>
-                        <p>{description}</p>
-                      </div>
-                    </div>
-                  </li>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
+                Your Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="Enter your email"
+                className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full"
+              />
+              {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+            </div>
+            <div className="mb-4">
+              <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
+                Your Message
+              </label>
+              <textarea
+                id="message"
+                value={message}
+                onChange={handleMessageChange}
+                placeholder="Enter your message"
+                className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full"
+              ></textarea>
+              {errors.message && <p className="text-red-500 text-xs">{errors.message}</p>}
+            </div>
+            <div className="mb-4 flex items-center">
+              <label htmlFor="rating" className="block text-gray-700 text-sm font-bold mb-2 mr-2">
+                Rate Us:
+              </label>
+              <div id="rating" className="flex">
+                {[...Array(5)].map((_, index) => (
+                  <svg
+                    key={index}
+                    onClick={() => handleStarClick(index)}
+                    className={`w-6 h-6 cursor-pointer ${rating > index ? 'text-yellow-500' : 'text-gray-400'}`}
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z" />
+                  </svg>
                 ))}
-              </ul>
-            )}
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Submit
+            </button>
+          </form>
+        ) : (
+          <div className="text-center">
+            <p className="text-lg font-bold">Thanks {userName} for contacting us!</p>
+            <p>Thank you for the {rating} star{rating > 1 ? 's' : ''} rating!</p>
+            <p>Feel free to follow our social media pages below!</p>
           </div>
+        )}
+        <div className="container">
+          <header>
+            <h1>Follow Me On Social Media</h1>
+          </header>
+          <ul className="accordion">
+            <li className="tab">
+              <div className="social youtube">
+                <a href="https://youtube.com/traversymedia" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-youtube"></i>
+                </a>
+              </div>
+              <div className="content">
+                <h1>YouTube</h1>
+                <p>Follow us on YouTube for the latest Space rentals</p>
+              </div>
+            </li>
+            <li className="tab">
+              <div className="social twitter">
+                <a href="https://twitter.com/traversymedia" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-twitter"></i>
+                </a>
+              </div>
+              <div className="content">
+                <h1>Twitter</h1>
+                <p>Follow us on Twitter for updates, article & blog shares, and more</p>
+              </div>
+            </li>
+            <li className="tab">
+              <div className="social facebook">
+                <a href="https://facebook.com/traversymedia" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+              </div>
+              <div className="content">
+                <h1>Facebook</h1>
+                <p>Follow us on Facebook to stay up to date with our work</p>
+              </div>
+            </li>
+            <li className="tab">
+              <div className="social instagram">
+                <a href="http://instagram.com/traversymedia" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-instagram"></i>
+                </a>
+              </div>
+              <div className="content">
+                <h1>Instagram</h1>
+                <p>Follow us on Instagram for a more personal look into our work</p>
+              </div>
+            </li>
+            <li className="tab">
+              <div className="social linkedin">
+                <a href="https://linkedin.com/in/traversymedia" target="_blank" rel="noopener noreferrer">
+                  <i className="fab fa-linkedin"></i>
+                </a>
+              </div>
+              <div className="content">
+                <h1>LinkedIn</h1>
+                <p>Follow us on LinkedIn for professional updates and networking</p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </>
