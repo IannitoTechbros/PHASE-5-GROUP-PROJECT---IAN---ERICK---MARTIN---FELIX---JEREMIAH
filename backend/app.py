@@ -36,6 +36,42 @@ def login():
     access_token = create_access_token(identity={'id': user.id, 'role': user.role}) 
     return make_response(jsonify(access_token=access_token, user=user.to_dict()), 200)
 
+
+@app.route('/spaces', methods=['POST'])
+@jwt_required()
+def create_space():
+    if 'image' not in request.files:
+        return jsonify({'message': 'No image file part'}), 400
+
+    file = request.files['image']
+    if file.filename == '':
+        return jsonify({'message': 'No selected file'}), 400
+    
+    if not (request.form.get('name') and request.form.get('location')):
+        return jsonify({'message': 'Missing required fields'}), 400
+
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
+
+    file.save(file_path)
+
+    data = request.form
+    new_space = Space(
+        name=data.get('name'),
+        location=data.get('location'),
+        capacity=data.get('capacity'),
+        amenities=data.get('amenities'),
+        ratecard=data.get('ratecard'),
+        image=f"/uploads/{filename}"  
+    )
+    db.session.add(new_space)
+    db.session.commit()
+
+    return jsonify({'message': 'Space created successfully'}), 201
+
 if __name__ == '__main__':
     app.run(debug=True)
 
