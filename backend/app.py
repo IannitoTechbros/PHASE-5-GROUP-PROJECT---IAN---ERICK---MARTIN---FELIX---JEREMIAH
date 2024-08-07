@@ -33,8 +33,20 @@ def login():
     if not user or not bcrypt.check_password_hash(user.password, data['password']):
         return make_response(jsonify({'message': 'Invalid email or password'}), 401)
 
-    access_token = create_access_token(identity={'id': user.id, 'role': user.role}) 
-    return make_response(jsonify(access_token=access_token, user=user.to_dict()), 200)
+
+
+    return make_response(jsonify(access_token= access_token, user=user.to_dict()), 200)
+@app.route('/users/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_user(id):
+    user = User.query.get(id)
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({'message': 'User deleted successfully'})
+    return jsonify({'message': 'User not found'}), 404
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
