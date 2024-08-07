@@ -55,3 +55,18 @@ def update_space(id):
         db.session.commit()
         return jsonify({'message': 'Space updated successfully'})
     return jsonify({'message': 'Space not found'}), 404
+
+@app.route('/spaces', methods=['GET'])
+@jwt_required()
+def get_spaces():
+    spaces = Space.query.all()
+    return jsonify([{
+        'id': space.id,
+        'name': space.name,
+        'location': space.location,
+        'capacity': space.capacity,
+        'amenities': space.amenities,
+        'ratecard': space.ratecard,
+        'image': space.image,
+        'isBooked': space.booked
+    } for space in spaces])
