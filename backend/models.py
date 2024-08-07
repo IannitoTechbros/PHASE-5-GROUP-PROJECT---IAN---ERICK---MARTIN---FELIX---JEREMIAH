@@ -4,6 +4,21 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 
+class Space(db.Model):
+    __tablename__ = 'spaces'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    location = db.Column(db.String(100), nullable=False)
+    capacity = db.Column(db.Integer, nullable=False)
+    amenities = db.Column(db.String(255), nullable=False)
+    ratecard = db.Column(db.Integer, nullable=False)
+    image = db.Column(db.String(255), nullable=True)
+    booked = db.Column(db.Boolean, default=False)  
+
+    def __repr__(self):
+        return f'<Space {self.name}>'
+
 
 class Booking(db.Model):
     __tablename__ = 'bookings'
