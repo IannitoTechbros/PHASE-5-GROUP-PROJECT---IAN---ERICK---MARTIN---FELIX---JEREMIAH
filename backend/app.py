@@ -36,6 +36,37 @@ def login():
     access_token = create_access_token(identity={'id': user.id, 'role': user.role}) 
     return make_response(jsonify(access_token=access_token, user=user.to_dict()), 200)
 
+@app.route('/spaces/<int:id>', methods=['PUT'])
+@jwt_required()
+def update_space(id):
+    data = request.get_json()
+    space = Space.query.get(id)
+    if space:
+        space.name = data.get('name', space.name)
+        space.location = data.get('location', space.location)
+        space.capacity = data.get('capacity', space.capacity)
+        space.amenities = data.get('amenities', space.amenities)
+        space.ratecard = data.get('ratecard', space.ratecard)
+        space.image = data.get('image', space.image)
+        space.booked = data.get('booked', space.booked)  
+        db.session.commit()
+        return jsonify({'message': 'Space updated successfully'})
+    return jsonify({'message': 'Space not found'}), 404
+
+@app.route('/spaces', methods=['GET'])
+@jwt_required()
+def get_spaces():
+    spaces = Space.query.all()
+    return jsonify([{
+        'id': space.id,
+        'name': space.name,
+        'location': space.location,
+        'capacity': space.capacity,
+        'amenities': space.amenities,
+        'ratecard': space.ratecard,
+        'image': space.image,
+        'isBooked': space.booked
+    } for space in spaces])
 
 @app.route('/spaces', methods=['POST'])
 @jwt_required()
@@ -75,34 +106,4 @@ def create_space():
 if __name__ == '__main__':
     app.run(debug=True)
 
-@app.route('/spaces/<int:id>', methods=['PUT'])
-@jwt_required()
-def update_space(id):
-    data = request.get_json()
-    space = Space.query.get(id)
-    if space:
-        space.name = data.get('name', space.name)
-        space.location = data.get('location', space.location)
-        space.capacity = data.get('capacity', space.capacity)
-        space.amenities = data.get('amenities', space.amenities)
-        space.ratecard = data.get('ratecard', space.ratecard)
-        space.image = data.get('image', space.image)
-        space.booked = data.get('booked', space.booked)  
-        db.session.commit()
-        return jsonify({'message': 'Space updated successfully'})
-    return jsonify({'message': 'Space not found'}), 404
 
-@app.route('/spaces', methods=['GET'])
-@jwt_required()
-def get_spaces():
-    spaces = Space.query.all()
-    return jsonify([{
-        'id': space.id,
-        'name': space.name,
-        'location': space.location,
-        'capacity': space.capacity,
-        'amenities': space.amenities,
-        'ratecard': space.ratecard,
-        'image': space.image,
-        'isBooked': space.booked
-    } for space in spaces])
