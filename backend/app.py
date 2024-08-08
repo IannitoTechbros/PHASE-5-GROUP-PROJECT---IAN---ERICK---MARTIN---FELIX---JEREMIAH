@@ -103,6 +103,28 @@ def create_space():
 
     return jsonify({'message': 'Space created successfully'}), 201
 
+@app.route('/mpesa-callback', methods=['POST'])
+def mpesa_callback():
+    data = request.get_json()
+    app.logger.info(f"Callback data received: {data}")
+
+    result_code = data['Body']['stkCallback']['ResultCode']
+    merchant_request_id = data['Body']['stkCallback']['MerchantRequestID']
+    
+    if result_code == 0:  # Successful payment
+        mpesa_receipt_number = data['Body']['stkCallback']['CallbackMetadata']['Item'][1]['Value']
+        
+        booking = Booking.query.filter_by(id=merchant_request_id).first()
+        if booking:
+            booking.payment_status = 'completed'
+            booking.mpesa_receipt_number = mpesa_receipt_number
+            db.session.commit()
+            app.logger.info(f"Payment successful for booking ID {merchant_request_id}")
+    
+    return jsonify({'message': 'Callback received'}), 200
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
 
