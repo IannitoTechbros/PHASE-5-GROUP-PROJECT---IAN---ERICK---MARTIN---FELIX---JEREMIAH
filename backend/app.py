@@ -125,6 +125,16 @@ def book_space(id):
     db.session.commit()
 
     return jsonify({'message': 'Space booked successfully'}), 201
+  
+@app.route('/spaces/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_space(id):
+    space = Space.query.get(id)
+    if space:
+        db.session.delete(space)
+        db.session.commit()
+        return jsonify({'message': 'Space deleted successfully'})
+    return jsonify({'message': 'Space not found'}), 404
 
 @app.route('/mpesa-callback', methods=['POST'])
 def mpesa_callback():
@@ -151,13 +161,5 @@ def mpesa_callback():
 if __name__ == '__main__':
     app.run(debug=True)
 
-@app.route('/spaces/<int:id>', methods=['DELETE'])
-@jwt_required()
-def delete_space(id):
-    space = Space.query.get(id)
-    if space:
-        db.session.delete(space)
-        db.session.commit()
-        return jsonify({'message': 'Space deleted successfully'})
-    return jsonify({'message': 'Space not found'}), 404
+
 
