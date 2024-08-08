@@ -9,6 +9,17 @@ import os
 
 CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}})
 
+
+
+
+def format_phone_number(number):
+    if number.startswith('0'):
+        return f'254{number[1:]}'
+    elif number.startswith('254'):
+        return number
+    else:
+        raise ValueError("Invalid phone number format")
+
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.get_json()
