@@ -103,6 +103,29 @@ def create_space():
 
     return jsonify({'message': 'Space created successfully'}), 201
 
+
+@app.route('/spaces/<int:id>/book', methods=['POST'])
+@jwt_required()
+def book_space(id):
+    data = request.get_json()
+    space = Space.query.get(id)
+    if not space:
+        return jsonify({'message': 'Space not found'}), 404
+
+    if space.booked:
+        return jsonify({'message': 'Space is already booked'}), 400
+
+    user_id = get_jwt_identity()['id']
+    hours = data.get('hours')
+    total_amount = hours * space.ratecard
+
+    booking = Booking(user_id=user_id, space_id=id, hours=hours, total_amount=total_amount)
+    space.booked = True
+    db.session.add(booking)
+    db.session.commit()
+
+    return jsonify({'message': 'Space booked successfully'}), 201
+
 @app.route('/mpesa-callback', methods=['POST'])
 def mpesa_callback():
     data = request.get_json()
