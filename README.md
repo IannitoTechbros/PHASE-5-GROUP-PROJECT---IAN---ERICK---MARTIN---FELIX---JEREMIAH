@@ -1,7 +1,7 @@
 # PHASE-5-GROUP-PROJECT---IAN---ERICK---MARTIN---FELIX---JEREMIAH
 
 SpaceHub;
-(subject to update later)
+Creating events one space at a time!
 
 
 
