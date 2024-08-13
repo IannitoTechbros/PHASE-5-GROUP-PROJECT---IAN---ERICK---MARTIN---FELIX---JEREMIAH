@@ -6,7 +6,7 @@ Creating events one space at a time!
 
 
 ## Project Description
-This project is a collaborative effort by Ian, Erick, Martin, Felix, and Jeremiah. The project aims to [brief project goal or description].
+"This project is a collaborative effort by Ian, Erick, Martin, Felix, and Jeremiah. The project aims to provide a seamless platform for users to book spaces for events, leveraging the power of React for the front-end and Flask for the backend."
 
 ## Table of Contents
 - [PHASE-5-GROUP-PROJECT---IAN---ERICK---MARTIN---FELIX---JEREMIAH](#phase-5-group-project---ian---erick---martin---felix---jeremiah)
