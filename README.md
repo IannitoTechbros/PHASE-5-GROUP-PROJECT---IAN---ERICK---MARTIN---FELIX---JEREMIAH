@@ -26,7 +26,7 @@ Follow these steps to set up the project locally.
 
 ### Prerequisites
 - Node.js and npm installed on your machine
-- Python 3.8 + and flask installed for running server
+- Python 3.8 + and Flask installed for running the server
 - Other dependencies specified in the Pipfile
 
 ### Steps
@@ -92,6 +92,71 @@ The project is organized into the following directories:
 - frontend: Contains the frontend code for the application.
 - backend: Contains the backend code for the application.
 
+### Tree Structure
+
+space-hub-frontend/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   ├── components/
+│   │   ├── Landing/
+│   │   │   ├── Home.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── Signup.jsx
+│   │   │   ├── About.jsx
+│   │   │   └── Contact.jsx
+│   │   ├── User/
+│   │   │   ├── Spaces.jsx
+│   │   │   ├── Billing.jsx
+│   │   │   └── Invoice.jsx
+│   │   ├── Admin/
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Users.jsx
+│   │   │   ├── Spaces.jsx
+│   │   │   ├── CreateUser.jsx
+│   │   │   └── CreateEvent.jsx
+│   │   ├── common/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   └── Sidebar.jsx
+│   ├── styles/
+│   │   └── main.css
+│   ├── App.jsx
+│   ├── index.jsx
+│   ├── routes.js
+│   └── setupTests.js
+├── tailwind.config.js
+├── postcss.config.js
+├── package.json
+├── package-lock.json
+├── README.md
+└── .gitignore
+
+space-hub-backend/
+├── app/
+│   ├── _init_.py
+│   ├── models.py
+│   ├── views/
+│   │   ├── _init_.py
+│   │   ├── auth.py
+│   │   ├── admin.py
+│   │   ├── client.py
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── index.html
+│   │   └── ...
+│   ├── static/
+│   │   ├── css/
+│   │   ├── js/
+│   │   └── images/
+├── config.py
+├── requirements.txt
+├── run.py
+├── README.md
+└── .gitignore
 
 
 ## Contributors
