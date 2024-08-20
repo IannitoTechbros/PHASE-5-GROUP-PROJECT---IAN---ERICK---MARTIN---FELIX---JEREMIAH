@@ -23,7 +23,7 @@ const CreateUser = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/signup', { name, email, password });
+      await axios.post('https://space-hub-backend-gphk.onrender.com/signup', { name, email, password });
       navigate('/dashboard');
     } catch (error) {
       console.error('Error creating user:', error);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import Home from './components/Landing/Home';
 import About from './components/Landing/About';
 import Contact from './components/Landing/Contact';
@@ -16,6 +15,7 @@ import Billing from './components/User/Billing';
 import Invoice from './components/User/Invoice';
 import Checkout from './components/User/CheckOut';
 import UpdateSpace from './components/Admin/UpdateSpace';
+import PaymentStatus from './components/User/PaymentStatus';
 
 const App = () => {
   return (
@@ -32,10 +32,11 @@ const App = () => {
         <Route path="/spaces" element={<Spaces />} />
         <Route path="/users" element={<Users />} />
         <Route path="/userspaces" element={<UserSpaces />} />
-        <Route path="/billing" element={<Billing />} />
+        <Route path="/billing/:id" element={<Billing />} />
         <Route path="/invoice" element={<Invoice />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/updatespace/:id" element={<UpdateSpace />} />
+        <Route path="/payment-status/:bookingId" element={<PaymentStatus />} />
       </Routes>
     </div>
   );

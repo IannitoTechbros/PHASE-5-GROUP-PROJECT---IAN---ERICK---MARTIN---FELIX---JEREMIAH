@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import sha1 from 'sha1';
+import logo from '../../assets/images/logo.png';
 
 async function isPasswordPwned(password) {
   const hash = sha1(password);
@@ -58,7 +59,7 @@ function Signup() {
           return;
         }
 
-        const response = await axios.post('http://localhost:5000/signup', JSON.stringify(values), {
+        const response = await axios.post('https://space-hub-backend-gphk.onrender.com/signup', JSON.stringify(values), {
           headers: {
             'Content-Type': 'application/json'
           }
@@ -76,97 +77,104 @@ function Signup() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-200">
-      <form className="bg-white shadow-lg rounded-lg px-10 pt-8 pb-12 mb-4 w-full max-w-lg transition-transform transform hover:scale-103 duration-500 ease-in-out" onSubmit={formik.handleSubmit}>
-        <h2 className="text-2xl text-center font-bold mb-6">New to Space Hub</h2>
-        {message && (
-          <p className='text-center mt-4 text-red-500'>{message}</p>
-        )}
-        <div className="mb-4">
-          <input
-            className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
-            type="text"
-            placeholder="Enter your name"
-            name='name'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.name}
-          />
-          {formik.touched.name && formik.errors.name && (
-            <p className="text-red-500">{formik.errors.name}</p>
+    <>
+      <div className="absolute top-4 left-4 animate-slideIn">
+        <a href="/" className="flex items-center space-x-2">
+          <img src={logo} alt="Space Hub Logo" className="w-14 h-14 rounded-full" />
+        </a>
+      </div>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-blue-200">
+        <form className="bg-white shadow-lg rounded-lg px-10 pt-8 pb-12 mb-4 w-full max-w-lg transition-transform transform hover:scale-103 duration-500 ease-in-out" onSubmit={formik.handleSubmit}>
+          <h2 className="text-2xl text-center font-bold mb-6">New to Space Hub</h2>
+          {message && (
+            <p className='text-center mt-4 text-red-500'>{message}</p>
           )}
-        </div>
-        <div className="mb-4">
-          <input
-            className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
-            type="email"
-            placeholder="Enter your email"
-            name='email'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-          />
-          {formik.touched.email && formik.errors.email && (
-            <p className="text-red-500">{formik.errors.email}</p>
-          )}
-        </div>
-        <div className="mb-4 relative">
-          <input
-            className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Enter your password"
-            name='password'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-          />
-          <button 
-            type='button'
-            className='absolute inset-y-0 right-0 pr-3 flex items-center leading-5'
-            onClick={toggleShowPassword}
-            aria-label={showPassword ? 'Hide password' : 'Show password'}
-          >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
-          </button>
-          {formik.touched.password && formik.errors.password && (
-            <p className="text-red-500">{formik.errors.password}</p>
-          )}
-        </div>
-        <div className="mb-4 relative">
-          <input
-            className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
-            type={showPasswordConfirmation ? 'text' : 'password'}
-            placeholder="Confirm your password"
-            name='passwordConfirmation'
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.passwordConfirmation}
-          />
-          <button
-            type='button'
-            className='absolute inset-y-0 right-0 pr-3 flex items-center leading-5'
-            onClick={toggleShowPasswordConfirmation}
-            aria-label={showPasswordConfirmation ? 'Hide password confirmation' : 'Show password confirmation'}
-          >
-            {showPasswordConfirmation ? <FaEyeSlash /> : <FaEye />}
-          </button>
-          {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && (
-            <p className="text-red-500">{formik.errors.passwordConfirmation}</p>
-          )}
-        </div>
-        <div className="flex items-center justify-center">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
-          >
-            Sign Up
-          </button>
-        </div>
-        <p className="text-gray-600 text-md text-center mt-4">
-          Already have an account? <Link to="/login" className="text-blue-500">Login</Link>
-        </p>
-      </form>
-    </div>
+          <div className="mb-4">
+            <input
+              className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
+              type="text"
+              placeholder="Enter your name"
+              name='name'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.name}
+            />
+            {formik.touched.name && formik.errors.name && (
+              <p className="text-red-500">{formik.errors.name}</p>
+            )}
+          </div>
+          <div className="mb-4">
+            <input
+              className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
+              type="email"
+              placeholder="Enter your email"
+              name='email'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+            />
+            {formik.touched.email && formik.errors.email && (
+              <p className="text-red-500">{formik.errors.email}</p>
+            )}
+          </div>
+          <div className="mb-4 relative">
+            <input
+              className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Enter your password"
+              name='password'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+            />
+            <button 
+              type='button'
+              className='absolute inset-y-0 right-0 pr-3 flex items-center leading-5'
+              onClick={toggleShowPassword}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+            {formik.touched.password && formik.errors.password && (
+              <p className="text-red-500">{formik.errors.password}</p>
+            )}
+          </div>
+          <div className="mb-4 relative">
+            <input
+              className="shadow-md appearance-none border border-blue-300 rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
+              type={showPasswordConfirmation ? 'text' : 'password'}
+              placeholder="Confirm your password"
+              name='passwordConfirmation'
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.passwordConfirmation}
+            />
+            <button
+              type='button'
+              className='absolute inset-y-0 right-0 pr-3 flex items-center leading-5'
+              onClick={toggleShowPasswordConfirmation}
+              aria-label={showPasswordConfirmation ? 'Hide password confirmation' : 'Show password confirmation'}
+            >
+              {showPasswordConfirmation ? <FaEyeSlash /> : <FaEye />}
+            </button>
+            {formik.touched.passwordConfirmation && formik.errors.passwordConfirmation && (
+              <p className="text-red-500">{formik.errors.passwordConfirmation}</p>
+            )}
+          </div>
+          <div className="flex items-center justify-center">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline transition-transform transform hover:scale-105 duration-300"
+            >
+              Sign Up
+            </button>
+          </div>
+          <p className="text-gray-600 text-md text-center mt-4">
+            Already have an account? <Link to="/login" className="text-blue-500">Login</Link>
+          </p>
+        </form>
+      </div>
+    </>
   );
 }
 

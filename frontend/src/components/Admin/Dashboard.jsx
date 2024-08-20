@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import logo from '../../assets/images/logo.png';
 import backgroundImage from '../../assets/images/8448.jpg';
+import backgroundImage3 from '../../assets/images/adminbackground.jpg';
 
 const Dashboard = () => {
   const navigate = useNavigate(); // Initialize navigate
@@ -14,14 +15,14 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="relative min-h-screen bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage3})` }}>
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black opacity-50"></div>
 
       {/* Top Navigation */}
       <div className="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50">
         <a href="/" className="flex items-center space-x-2">
-          <img src={logo} alt="Space Hub Logo" className="w-20 h-18" />
+          <img src={logo} alt="Space Hub Logo" className="w-14 h-14 rounded-full" />
         </a>
         <nav className="flex space-x-4">
           <Link to="/createspace" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Space</Link>

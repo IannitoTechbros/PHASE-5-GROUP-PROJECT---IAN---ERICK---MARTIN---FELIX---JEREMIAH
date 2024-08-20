@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/static/css/main.816490e8.css",
+    "main.js": "/static/js/main.7b110fec.js",
+    "static/media/8448.jpg": "/static/media/8448.4684e66746ce0b65e1b8.jpg",
+    "static/media/background2.jpg": "/static/media/background2.a6125ca0a1e2f8dd1250.jpg",
+    "static/media/timelyDelivery.png": "/static/media/timelyDelivery.7a610e26e7f82ea1c395.png",
+    "static/media/742.jpg": "/static/media/742.0a1ccbdedd93b721014f.jpg",
+    "static/media/peopleFirst.png": "/static/media/peopleFirst.ea53f7029d73179161f4.png",
+    "static/media/innovation.png": "/static/media/innovation.1d56aebd5d87b674b266.png",
+    "static/media/commitment.png": "/static/media/commitment.8c0cd48e5f681237fa51.png",
+    "static/media/reliability.png": "/static/media/reliability.e7f65b9a33745457712c.png",
+    "static/media/adminbackground.jpg": "/static/media/adminbackground.5faaa29a75145f99ac05.jpg",
+    "static/media/customerSatisfaction.png": "/static/media/customerSatisfaction.aaf3cf381d5c27ee09a3.png",
+    "static/media/logo.png": "/static/media/logo.68776128b198aeea4784.png",
+    "static/media/youtube.svg": "/static/media/youtube.993a2994b3d0e70225e185161721f680.svg",
+    "index.html": "/index.html",
+    "static/media/twitter.svg": "/static/media/twitter.410a9d14144a810542330f7d951ff2cf.svg",
+    "static/media/star.svg": "/static/media/star.8070f2335a60a0172b4cde8fddb5b020.svg",
+    "static/media/dollar-sign.svg": "/static/media/dollar-sign.8d9a6f938731fde21207ac6851ae5fcb.svg",
+    "static/media/map-pin.svg": "/static/media/map-pin.8c41fcd32a64210260619a622335959e.svg",
+    "static/media/facebook.svg": "/static/media/facebook.54b6ed1796ae51e7991a86b99ceb8334.svg",
+    "static/media/chevron-left.svg": "/static/media/chevron-left.982a40d4f9e3cf9fdaeaf4af9da46c14.svg",
+    "static/media/chevron-right.svg": "/static/media/chevron-right.d45fd2f46e93f5c3aa0a7d0617d9fecf.svg",
+    "main.816490e8.css.map": "/static/css/main.816490e8.css.map",
+    "main.7b110fec.js.map": "/static/js/main.7b110fec.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.816490e8.css",
+    "static/js/main.7b110fec.js"
+  ]
+}

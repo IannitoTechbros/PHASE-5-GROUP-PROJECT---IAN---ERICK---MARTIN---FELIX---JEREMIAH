@@ -14,7 +14,7 @@ const UpdateSpace = () => {
     const fetchSpace = async () => {
       try {
         const token = localStorage.getItem('accessToken');
-        const response = await axios.get(`http://localhost:5000/spaces/${id}`, {
+        const response = await axios.get(`https://space-hub-backend-gphk.onrender.com/spaces/${id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ const UpdateSpace = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.put(`http://localhost:5000/spaces/${id}`, space, {
+      await axios.put(`https://space-hub-backend-gphk.onrender.com/spaces/${id}`, space, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'

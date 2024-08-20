@@ -4,6 +4,8 @@ from sqlalchemy import MetaData
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
+import os
+import logging
 
 metadata = MetaData(
     naming_convention={
@@ -12,16 +14,27 @@ metadata = MetaData(
 )
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///space.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = '57f804c427f744988ae5e25ef4067a0c'
 app.config['JWT_SECRET_KEY'] = '12345'
-app.config['UPLOAD_FOLDER'] = 'uploads/'  
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  
+app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+# M-Pesa configuration
+app.config['MPESA_CONSUMER_KEY'] = 'apyr591za4yQdIHdcCxgyj7CiBLdJfcN9TdW1zeLmAfVok85'
+app.config['MPESA_CONSUMER_SECRET'] = 'DYx642cpA1Q16PWWrslFve1PhRIoogqR5DvvSuDWcahGFCJ23ePrCimJ4RgFFnAO'
+app.config['MPESA_BUSINESS_SHORT_CODE'] = '174379'  
+app.config['MPESA_PASS_KEY'] = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'  
+app.config['MPESA_TRANSACTION_TYPE'] = 'CustomerPayBillOnline'
+app.config['MPESA_CALLBACK_URL'] = 'https://space-hub-backend-gphk.onrender.com/mpesa-callback'
+
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 
-
-db = SQLAlchemy(metadata=metadata)
-db.init_app(app)
+db = SQLAlchemy(app, metadata=metadata)  # Initialize with the app
 migrate = Migrate(app, db)
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)

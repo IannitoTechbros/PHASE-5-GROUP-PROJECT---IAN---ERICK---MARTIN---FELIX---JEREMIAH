@@ -9,18 +9,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.navbar {
-  background: linear-gradient(90deg, #f0f0f0, #ffffff);
-}
-
 .container {
   margin: 50px auto;
   width: 90%;
-}
-
-.contact-container {
-  background: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -116,46 +107,8 @@ header h1 {
   background-color: #d51c1c; /* Instagram pink */
 }
 
-.social.linkedin:hover {
-  background-color: #0077b5; /* LinkedIn blue */
-}
-
-.social.github:hover {
-  background-color: #333; /* GitHub black */
-}
-
-.social.email:hover {
-  background-color: #ea4335; /* Gmail red */
-}
-
 .social:hover a {
   color: #fff; /* Ensure icon is visible against background color */
-}
-
-.input-field {
-  transition: all 0.3s ease;
-}
-
-.input-field:hover {
-  border-color: #333;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-}
-
-#rating svg {
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-#rating svg:hover {
-  color: #f5b301; /* Yellow color on hover */
-}
-
-.text-yellow-500 {
-  color: #f5b301; /* Yellow color for filled stars */
-}
-
-.text-gray-400 {
-  color: #d1d5db; /* Gray color for empty stars */
 }
 
 @media (max-width: 950px) {
@@ -192,5 +145,23 @@ header h1 {
   .accordion {
     width: 100%;
     min-width: 350px;
-  }
+}
+
+/* Star Rating */
+#rating svg {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#rating svg:hover {
+  color: #f5b301; /* Yellow color on hover */
+}
+
+.text-yellow-500 {
+  color: #f5b301; /* Yellow color for filled stars */
+}
+
+.text-gray-400 {
+  color: #d1d5db; /* Gray color for empty stars */
+}
 }

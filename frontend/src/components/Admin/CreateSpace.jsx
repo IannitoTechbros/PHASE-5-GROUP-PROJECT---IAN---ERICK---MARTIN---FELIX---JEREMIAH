@@ -30,7 +30,7 @@ const CreateSpace = () => {
     console.log('AccessToken:', accessToken); 
 
     try {
-      const response = await axios.post('http://localhost:5000/spaces', formData, {
+      const response = await axios.post('https://space-hub-backend-gphk.onrender.com/spaces', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           ...(accessToken && { 'Authorization': `Bearer ${accessToken}` }),

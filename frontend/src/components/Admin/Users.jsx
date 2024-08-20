@@ -11,7 +11,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem('accessToken');
-        const response = await axios.get('http://localhost:5000/users', {
+        const response = await axios.get('https://space-hub-backend-gphk.onrender.com/users', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -32,7 +32,7 @@ const Users = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.delete(`http://localhost:5000/users/${id}`, {
+      await axios.delete(`https://space-hub-backend-gphk.onrender.com/users/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
